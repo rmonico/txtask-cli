@@ -16,6 +16,21 @@ public class App {
     public Args parseCommandLine(String... cliArgs) {
         Args args = new Args();
 
+        for (int i = 0; i < cliArgs.length; ) {
+            String arg = cliArgs[i];
+
+
+            if ("rc.home".equals(arg)) {
+                String value = cliArgs[i + 1];
+
+                args.home(value);
+
+                i += 2;
+            } else {
+                i++;
+            }
+        }
+
         return args;
     }
 }
