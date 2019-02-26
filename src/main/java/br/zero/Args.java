@@ -5,6 +5,14 @@ import java.util.List;
 
 public class Args {
     private String home;
+    private ArrayList<String> filter;
+
+    public Args() {
+        filter = new ArrayList<>();
+
+        filter.add("filter param 1");
+        filter.add("filter param 22");
+    }
 
     public static Args parse(String... arguments) {
         Args args = new Args();
@@ -50,6 +58,6 @@ public class Args {
     }
 
     public List<String> filter() {
-        return new ArrayList<>();
+        return filter;
     }
 }
