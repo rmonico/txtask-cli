@@ -10,6 +10,7 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AppTest {
+
     @Test
     public void should_parse_home_location() {
         Args args = Args.parse("rc.home", "/home/user/txtask_home_folder");
@@ -22,5 +23,12 @@ public class AppTest {
         CLIArgParserException exception = assertThrows(CLIArgParserException.class, () -> Args.parse("rc.home"));
 
         assertThat(exception.getMessage(), is("'rc.home' switch must have a value"));
+    }
+
+    @Test
+    public void home_switch_must_be_required() {
+        CLIArgParserException exception = assertThrows(CLIArgParserException.class, () -> Args.parse(""));
+
+        assertThat(exception.getMessage(), is("'rc.home' is required!"));
     }
 }
