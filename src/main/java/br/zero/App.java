@@ -4,6 +4,7 @@
 package br.zero;
 
 public class App {
+
     public String getGreeting() {
         return "Hello world.";
     }
@@ -13,6 +14,8 @@ public class App {
     }
 
     public Args parseCommandLine(String... cliArgs) {
-        return new Args();
+        Args args = new Args();
+
+        return args;
     }
 }
