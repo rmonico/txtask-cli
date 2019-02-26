@@ -1,7 +1,7 @@
 package br.zero;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 public class Args {
     private String home;
@@ -11,7 +11,7 @@ public class Args {
         filter = new ArrayList<>();
 
         filter.add("filter param 1");
-        filter.add("filter param 22");
+        filter.add("filter param 2");
     }
 
     public static Args parse(String... arguments) {
@@ -57,7 +57,7 @@ public class Args {
         this.home = value;
     }
 
-    public List<String> filter() {
-        return filter;
+    public Iterator<String> filter() {
+        return filter. iterator();
     }
 }

@@ -5,6 +5,8 @@ package br.zero;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.Iterator;
+
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -36,8 +38,10 @@ public class AppTest {
     public void should_pass_remaining_parameters_to_filter() {
         Args args = Args.parse("rc.home", "/home/user/txtask_home_folder", "filter param 1", "filter param 2");
 
-        assertThat(args.filter().get(0), is("filter param 1"));
-        assertThat(args.filter().get(1), is("filter param 2"));
-        assertThat(args.filter().size(), is(2));
+        Iterator<String> filter = args.filter();
+
+        assertThat(filter.next(), is("filter param 1"));
+        assertThat(filter.next(), is("filter param 2"));
+        assertThat(filter.hasNext(), is(false));
     }
 }
