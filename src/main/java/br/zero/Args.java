@@ -9,9 +9,6 @@ public class Args {
 
     public Args() {
         filter = new ArrayList<>();
-
-        filter.add("filter param 1");
-        filter.add("filter param 2");
     }
 
     public static Args parse(String... arguments) {
@@ -37,8 +34,11 @@ public class Args {
                 this.home(value);
 
                 i += 2;
-            } else
+            } else {
+                this.filter.add(arg);
+
                 i++;
+            }
         }
 
         this.checkRequiredSwitches();
