@@ -6,6 +6,12 @@ public class Args {
     public static Args parse(String... arguments) {
         Args args = new Args();
 
+        args.doParse(arguments);
+
+        return args;
+    }
+
+    private void doParse(String[] arguments) {
         for (int i = 0; i < arguments.length; ) {
             String arg = arguments[i];
 
@@ -17,15 +23,12 @@ public class Args {
 
                 String value = arguments[i + 1];
 
-                args.home(value);
+                this.home(value);
 
                 i += 2;
-            } else {
+            } else
                 i++;
-            }
         }
-
-        return args;
     }
 
     public String home() {
