@@ -11,4 +11,8 @@ public class App {
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
     }
+
+    public Args parseCommandLine(String... cliArgs) {
+        return new Args();
+    }
 }

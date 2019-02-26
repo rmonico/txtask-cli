@@ -3,12 +3,18 @@
  */
 package br.zero;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.junit.jupiter.api.Test;
+
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
 
 public class AppTest {
-    @Test public void testAppHasAGreeting() {
-        App classUnderTest = new App();
-        assertNotNull("app should have a greeting", classUnderTest.getGreeting());
+    @Test
+    public void testAppHasAGreeting() {
+        App app = new App();
+
+        Args args = app.parseCommandLine("--home", "/home/user/txtask_home_folder");
+
+        assertThat(args.home(), is("/home/user/txtask_home_folder"));
     }
 }
