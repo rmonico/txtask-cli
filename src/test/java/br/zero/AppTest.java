@@ -11,9 +11,7 @@ import static org.hamcrest.Matchers.is;
 public class AppTest {
     @Test
     public void should_parse_home_location() {
-        App app = new App();
-
-        Args args = app.parseCommandLine("rc.home", "/home/user/txtask_home_folder");
+        Args args = Args.parse("rc.home", "/home/user/txtask_home_folder");
 
         assertThat(args.home(), is("/home/user/txtask_home_folder"));
     }
