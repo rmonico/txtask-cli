@@ -1,5 +1,8 @@
 package br.zero;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Args {
     private String home;
 
@@ -44,5 +47,9 @@ public class Args {
 
     public void home(String value) {
         this.home = value;
+    }
+
+    public List<String> filter() {
+        return new ArrayList<>();
     }
 }

@@ -31,4 +31,13 @@ public class AppTest {
 
         assertThat(exception.getMessage(), is("'rc.home' is required!"));
     }
+
+    @Test
+    public void should_pass_remaining_parameters_to_filter() {
+        Args args = Args.parse("rc.home", "/home/user/txtask_home_folder", "filter param 1", "filter param 2");
+
+        assertThat(args.filter().get(0), is("filter param 1"));
+        assertThat(args.filter().get(1), is("filter param 2"));
+        assertThat(args.filter().size(), is(2));
+    }
 }
