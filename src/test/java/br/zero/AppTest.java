@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AppTest {
     @Test
@@ -14,5 +15,12 @@ public class AppTest {
         Args args = Args.parse("rc.home", "/home/user/txtask_home_folder");
 
         assertThat(args.home(), is("/home/user/txtask_home_folder"));
+    }
+
+    @Test
+    public void should_throw_exception_for_no_valued_home_switch() {
+        CLIArgParserException exception = assertThrows(CLIArgParserException.class, () -> Args.parse("rc.home"));
+
+        assertThat(exception.getMessage(), is("'rc.home' switch must have a value"));
     }
 }
