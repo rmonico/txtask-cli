@@ -29,6 +29,13 @@ public class Args {
             } else
                 i++;
         }
+
+        this.checkRequiredSwitches();
+    }
+
+    private void checkRequiredSwitches() {
+        if (this.home == null)
+            throw new CLIArgParserException("'rc.home' is required!");
     }
 
     public String home() {
