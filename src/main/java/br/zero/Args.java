@@ -9,8 +9,12 @@ public class Args {
         for (int i = 0; i < arguments.length; ) {
             String arg = arguments[i];
 
+            boolean onLastArgument = i == arguments.length -1;
 
             if ("rc.home".equals(arg)) {
+                if (onLastArgument)
+                    throw new CLIArgParserException("'rc.home' switch must have a value");
+
                 String value = arguments[i + 1];
 
                 args.home(value);
