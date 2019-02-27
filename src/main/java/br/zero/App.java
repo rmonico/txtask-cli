@@ -3,14 +3,67 @@
  */
 package br.zero;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.Iterator;
+
+import static br.zero.Logger.*;
+
 public class App {
 
-    public String getGreeting() {
-        return "Hello world.";
+    public static void main(String[] arguments) {
+        new App().run(Args.parse(arguments));
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
+    private void run(Args args) {
+        debug("rc.home : %s", args.home());
+        debug("filters : %s", filterString(args.filter()));
+
+        Iterator<File> fileNames = this.loadFileNamesFrom(args.home());
+
+        while (fileNames.hasNext()) {
+            info("Loading tasks from: '%s'", fileNames.next().getName());
+        }
+    }
+
+    private String filterString(Iterator<String> filter) {
+        if (!filter.hasNext())
+            return "<no filter specified>";
+
+        StringBuilder sb = new StringBuilder();
+
+        do {
+            if (sb.length() > 0)
+                sb.append(", ");
+
+            sb.append("'");
+            sb.append(filter.next());
+            sb.append("'");
+        } while (filter.hasNext());
+
+        return sb.toString();
+    }
+
+    private Iterator<File> loadFileNamesFrom(String homeFolderName) {
+        File home = new File(homeFolderName);
+
+        File[] files = home.listFiles(this::acceptOnlyTXTaskFiles);
+
+        return Arrays.asList(files).iterator();
+    }
+
+    private boolean acceptOnlyTXTaskFiles(File file) {
+        if (!file.isFile()) {
+            all("'%s' rejected because is not a file", file.getAbsolutePath());
+            return false;
+        }
+
+        boolean fileNameMatches = file.getName().matches(".*\\.txk$");
+
+        if (!fileNameMatches)
+            all("'%s' rejected because its file name doesnt matches", file.getAbsolutePath());
+
+        return fileNameMatches;
     }
 
 }
