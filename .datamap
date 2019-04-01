@@ -1,0 +1,4 @@
+description="txtask-cli"
+category=repos.todo
+synchronizer=git
+disable_bookmark=yes
